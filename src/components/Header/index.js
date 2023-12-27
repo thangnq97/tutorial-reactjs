@@ -1,11 +1,12 @@
 import { ShoppingCart } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import logo from '~/img/logo.png';
 
 export default function Header() {
     return (
         <header className="px-7 py-5 flex justify-between items-center">
             <Link to="">
-                <img src="img/logo.png" />
+                <img src={logo} />
             </Link>
             <div className="flex gap-6">
                 <nav>

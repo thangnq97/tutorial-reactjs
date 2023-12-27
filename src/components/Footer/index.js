@@ -1,11 +1,12 @@
 import { ContactEmergency, Facebook, Instagram, LocationCity, Phone, Twitter } from '@mui/icons-material';
+import logo from '~/img/logo.png';
 
 export default function Footer() {
     return (
         <footer className=" px-8 py-[64px] bg-[#335154] grid grid-cols-4 gap-6">
             <div>
                 <a href="#">
-                    <img src="img/logo.png" />
+                    <img src={logo} />
                 </a>
                 <div className="flex mt-3 gap-4 ml-5">
                     <Facebook className="text-red-500" />

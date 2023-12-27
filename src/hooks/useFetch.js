@@ -50,7 +50,7 @@ export const useFetch = (url) => {
                         error: err,
                     });
                 }
-            }, 2000);
+            }, 1000);
         })();
     }, [url]);
 

@@ -1,5 +1,6 @@
 import { Pagination } from '@mui/material';
 import { useEffect, useState } from 'react';
+import Product from '~/components/Product';
 export default function ProductsAll({ data }) {
     const [page, setPage] = useState(0);
     const [products, setProducts] = useState([]);
@@ -30,17 +31,7 @@ export default function ProductsAll({ data }) {
             <div className="grid grid-cols-4 gap-8 px-8 my-8">
                 {products.map((item) => {
                     return (
-                        <div key={item.id}>
-                            <a href="#">
-                                <img src={item.image} />
-                            </a>
-                            <a href="#">
-                                <h3 className="text-[20px] font-[800] text-[#335154] mt-3 mb-2">{item.name}</h3>
-                            </a>
-                            <p className="text-[#df453e] font-[800] text-[20px] text-[df453e] tracking-[1.5px]">
-                                ${item.price}
-                            </p>
-                        </div>
+                        <Product key={item.id} id={item.id} name={item.name} price={item.price} image={item.image} />
                     );
                 })}
             </div>
