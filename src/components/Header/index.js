@@ -1,8 +1,13 @@
 import { ShoppingCart } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import logo from '~/img/logo.png';
+import { Badge, Space } from 'antd';
+import { useContext } from 'react';
+import { CartContext } from '~/context/CartContext';
 
 export default function Header() {
+    const { cart } = useContext(CartContext);
+
     return (
         <header className="px-7 py-5 flex justify-between items-center">
             <Link to="">
@@ -39,7 +44,15 @@ export default function Header() {
                     </ul>
                 </nav>
                 <Link to="/cart" className="cursor-pointer">
-                    <ShoppingCart />
+                    <Space size="middle">
+                        {cart.length ? (
+                            <Badge count={cart.length}>
+                                <ShoppingCart shape="square" size="large" />
+                            </Badge>
+                        ) : (
+                            <ShoppingCart shape="square" size="large" />
+                        )}
+                    </Space>
                 </Link>
             </div>
         </header>

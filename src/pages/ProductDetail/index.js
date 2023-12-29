@@ -2,8 +2,8 @@ import BannerPath from '~/components/BannerPath';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '~/hooks/useFetch';
 import Loading from '~/components/Loading';
-import { InputNumber } from 'antd';
-import { useContext, useState } from 'react';
+import { InputNumber, Button, notification } from 'antd';
+import React, { useContext, useState } from 'react';
 import { CartContext } from '~/context/CartContext';
 
 export default function ProductDetail() {
@@ -11,7 +11,7 @@ export default function ProductDetail() {
     const { cart, setCart } = useContext(CartContext);
     const [number, setNumber] = useState(1);
     const { productId } = useParams();
-    const { data, isLoading, error } = useFetch(`${apiUrl}/${productId}`);
+    let { data, isLoading, error } = useFetch(`${apiUrl}/${productId}`);
     let { image } = data;
     image = '../../' + image;
 
@@ -41,6 +41,26 @@ export default function ProductDetail() {
         });
     };
 
+    const openNotification = () => {
+        notification.open({
+            message: 'Bạn đã đặt hàng thành công',
+            description: 'Vui lòng kiểm tra giỏ hàng!',
+            onClick: () => {
+                handleAddCart();
+            },
+            onClose: () => {
+                handleAddCart();
+            },
+            duration: 2,
+        });
+    };
+    // const contextValue = useMemo(
+    //     () => ({
+    //         name: 'Vui lòng kiểm tra giỏ hàng',
+    //     }),
+    //     [],
+    // );
+
     const handleChangeNumber = (value) => {
         setNumber(value);
     };
@@ -48,7 +68,7 @@ export default function ProductDetail() {
         <>
             <BannerPath path="Product detail" />
             <main className="bg-[#f0f2f2] grid grid-cols-2 px-[50px] py-[69px]">
-                <div>{isLoading ? <Loading /> : <img src={image} />}</div>
+                <div>{isLoading ? <Loading /> : <img src={image} alt="" />}</div>
                 <div className="py-5 px-4 flex flex-col gap-[50px] justify-center">
                     {isLoading ? (
                         <Loading />
@@ -64,13 +84,9 @@ export default function ProductDetail() {
                                 <InputNumber min={1} max={100} defaultValue={1} onChange={handleChangeNumber} />
                             </div>
                             <div>
-                                <button
-                                    onClick={handleAddCart}
-                                    type="submit"
-                                    className="bg-[#df453e] text-white font-semibold text-[18px] px-[36px] py-[18px] hover:bg-[#335154] hover:text-[#df453e] rounded"
-                                >
+                                <Button style={{ background: '#1677ff' }} type="primary" onClick={openNotification}>
                                     Đặt hàng
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>
